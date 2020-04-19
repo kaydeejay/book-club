@@ -4,7 +4,7 @@ if (mongoose.connection.readyState === 0) {
   mongoose.connect(require('./connection-string'), {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: true
+    useFindAndModify: false
   });
 }
 
