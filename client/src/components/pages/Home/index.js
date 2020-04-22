@@ -6,12 +6,13 @@ const Home = () => {
   const [bookList, setBookList] = useState([]);
 
   useEffect(() => {
-    API.getBooks()
-      .then(res => {
-        setBookList(res.data);
-        // console.log(res.data);
-      });
+    loadBooks();
   }, []);
+
+  const loadBooks = () => {
+    API.getBooks()
+      .then(res => setBookList(res.data));
+  };
 
   return (
     <div>
