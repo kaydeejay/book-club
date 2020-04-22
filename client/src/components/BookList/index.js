@@ -15,12 +15,19 @@ const BookList = () => {
 
   return (
     <div>
-      A list, presumably of books
-      <BookListItem title={
-        bookList.length > 0 ?
-          bookList[0].title :
-          "loading..."
-      } />
+      Your Saved Books:
+      {!bookList.length > 0 ?
+        "loading..." :
+        bookList.map(book => (
+          <BookListItem
+            key={book._id}
+            title={book.title}
+            authors={book.authors.join(', ')}
+            desc={book.description}
+            image={book.image}
+            link={book.link}
+          />
+        ))}
     </div>
   )
 }
