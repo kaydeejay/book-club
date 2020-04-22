@@ -3,7 +3,7 @@ import axios from 'axios';
 export default {
   // save a new book:
   saveBook: (book) => {
-    return axios.post('/api/new-book', book);
+    return axios.post('/api/books/new', book);
   },
   // get all books:
   getBooks: () => {
@@ -15,10 +15,10 @@ export default {
   },
   // update book:
   updateBook: (book) => {
-    return axios.put('/api/update-read', book);
+    return axios.put('/api/books/update', book);
   },
   // delete book:
   deleteBook: (id) => {
-    return axios.delete('/api/delete/' + id);
+    return axios.delete('/api/books/delete/' + id);
   }
 }

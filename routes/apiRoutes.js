@@ -8,16 +8,16 @@ router.get('/', function (req, res, next) {
 });
 
 // create:
-router.post('/new-book', bookController.addBook);
+router.post('/books/new', bookController.addBook);
 
 // read:
 router.get('/books/:id', bookController.findById);
 router.get('/books', bookController.findAll);
 
 // update:
-router.put('/update-read', bookController.markRead);
+router.put('/books/update', bookController.markRead);
 
 // delete:
-router.delete('/delete/:id', bookController.deleteById);
+router.delete('/books/delete/:id', bookController.deleteById);
 
 module.exports = router;

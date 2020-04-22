@@ -1,24 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import BookListItem from '../BookListItem';
-const axios = require('axios');
 
-const BookList = () => {
-  const [bookList, setBookList] = useState([]);
-
-  useEffect(() => {
-    axios.get('/api/books')
-      .then(res => {
-        console.log(res.data);
-        setBookList(res.data);
-      });
-  }, []);
-
+const BookList = ({ books }) => {
+  // console.log(books);
   return (
     <div>
-      Your Saved Books:
-      {!bookList.length > 0 ?
+      {!books.length > 0 ?
         "loading..." :
-        bookList.map(book => (
+        books.map(book => (
           <BookListItem
             key={book._id}
             title={book.title}
