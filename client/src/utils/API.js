@@ -20,5 +20,9 @@ export default {
   // delete book:
   deleteBook: (id) => {
     return axios.delete('/api/books/delete/' + id);
+  },
+  // search for new books on google books:
+  googleBookSearch: (url) => {
+    return axios.put('/api/search', { url: url });
   }
 }
