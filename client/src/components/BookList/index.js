@@ -2,7 +2,7 @@ import React from 'react';
 import BookListItem from '../BookListItem';
 
 const BookList = ({ books }) => {
-  // console.log(books)
+  console.log(books)
   return (
     <div>
       {books.length > 0 ?

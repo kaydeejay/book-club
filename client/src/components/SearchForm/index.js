@@ -6,6 +6,7 @@ const SearchForm = () => {
     title: "",
     author: ""
   });
+  const [results, setResults] = useState([]);
 
   const makeSearch = (titleString, authorString) => {
     const words = [];
@@ -31,7 +32,10 @@ const SearchForm = () => {
     const searchTerms = makeSearch(title, author);
     const url = `https://www.googleapis.com/books/v1/volumes?q=${searchTerms}+&key=`;
     API.googleBookSearch(url)
-      .then(res => console.log(res.data));
+      .then(res => {
+        // console.log(res.data);
+        setResults(res.data);
+      });
   }
 
   return (
@@ -41,6 +45,7 @@ const SearchForm = () => {
         <input onChange={handleInputChange} name="author" placeholder="Search by Author" />
         <button onClick={handleFormSubmit}>Search</button>
       </form>
+      {!results.length ? <BookList books={results} /> : ""}
     </div>
   )
 }
