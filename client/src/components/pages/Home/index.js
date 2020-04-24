@@ -4,25 +4,26 @@ import { BookList, BookListItem } from '../../BookList';
 import API from '../../../utils/API';
 
 const Home = () => {
-  const [appState, setAppState] = useState("ready");
+  const [dbBooksState, setDbBooksState] = useState("ready");
+  const [searchBooksState, setSearchBooksState] = useState("Search Results will be Displayed Here");
   const [savedBooks, setSavedBooks] = useState([]);
   const [searchedBooks, setSearchedBooks] = useState([]);
   const [formState, setFormState] = useState({});
 
   useEffect(() => {
     loadBooks();
-  }, [savedBooks])
+  }, [])
 
   const loadBooks = () => {
-    setAppState("loading");
+    setDbBooksState("loading");
     API.getBooks()
       .then(res => {
         setSavedBooks(res.data);
-        setAppState("resolved");
+        setDbBooksState("resolved");
       })
       .catch(err => {
         console.log(err);
-        setAppState("failure");
+        setDbBooksState("failure");
       });
   }
 
@@ -51,6 +52,7 @@ const Home = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    setSearchBooksState("loading...");
     const { title, author } = formState;
     const searchTerms = makeSearch(title, author);
     const url = `https://www.googleapis.com/books/v1/volumes?q=${searchTerms}+&key=`;
@@ -58,6 +60,11 @@ const Home = () => {
       .then(res => {
         console.log(res.data);
         setSearchedBooks(res.data);
+        setSearchBooksState("resolved");
+      })
+      .catch(err => {
+        console.log(err);
+        setSearchBooksState("failed");
       });
   }
 
@@ -65,7 +72,7 @@ const Home = () => {
     <div>
       <BookList header={"Your Library"}>
         {!savedBooks.length
-          ? <p>{appState}</p>
+          ? <p>{dbBooksState}</p>
           : savedBooks.map(book => (
             <BookListItem
               key={book._id}
@@ -83,6 +90,19 @@ const Home = () => {
         <button onClick={handleFormSubmit}>Search Google Books</button>
       </form>
       {/* BookList again, for searched books. */}
+      <BookList header={"Results:"}>
+        {!searchedBooks.length > 0
+          ? <p>{searchBooksState}</p>
+          : searchedBooks.map(book => (
+            <BookListItem
+              key={book.id}
+              image={book.volumeInfo.imageLinks.smallThumbnail}
+              title={book.volumeInfo.title}
+              authors={book.volumeInfo.authors.join(', ')}
+              description={book.volumeInfo.description.slice(0, 280) + "..."}
+            />
+          ))}
+      </BookList>
     </div>
   );
 }
