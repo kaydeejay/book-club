@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BookList, BookListItem } from '../../BookList';
+import SaveButton from '../../SaveButton';
 
 import API from '../../../utils/API';
 
@@ -68,6 +69,20 @@ const Home = () => {
       });
   }
 
+  const handleBookSave = (e) => {
+    console.log(e.target.props);
+    // const { title, authors, description, image } = e.target.props
+    // API.saveBook({
+    //   title: title,
+    //   authors: authors,
+    //   description: description,
+    //   image: image
+    // })
+    //   .then(() => {
+    //     loadBooks();
+    //   })
+  }
+
   return (
     <div>
       <BookList header={"Your Library"}>
@@ -80,7 +95,10 @@ const Home = () => {
               title={book.title}
               authors={book.authors.join(', ')}
               description={book.description.slice(0, 280) + "..."}
-            />
+            >
+              {/* <button onClick={handleBookSave}>Save to Library</button> */}
+              <SaveButton {...book} onClick={handleBookSave}>Save to Library</SaveButton>
+            </BookListItem>
           ))}
       </BookList>
       {/* Search Form */}
@@ -100,7 +118,10 @@ const Home = () => {
               title={book.volumeInfo.title}
               authors={book.volumeInfo.authors.join(', ')}
               description={book.volumeInfo.description.slice(0, 280) + "..."}
-            />
+            >
+              {/* <button onClick={handleBookSave}>Save to Library</button> */}
+              <SaveButton {...book.volumeInfo} onClick={handleBookSave}>Save to Library</SaveButton>
+            </BookListItem>
           ))}
       </BookList>
     </div>

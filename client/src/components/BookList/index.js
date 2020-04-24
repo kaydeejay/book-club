@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export const BookList = (props) => {
   return (
@@ -9,19 +9,15 @@ export const BookList = (props) => {
   );
 }
 
-export const BookListItem = ({
-  // extract props
-  image,
-  title,
-  authors,
-  description
-}) => {
+export const BookListItem = (props) => {
+  const { image, title, authors, description } = props;
   return (
     <div>
       <img src={image} alt="" />
       <h4>{title}</h4>
       <p>{authors}</p>
       <p>{description}</p>
+      {props.children}
     </div>
   );
 }

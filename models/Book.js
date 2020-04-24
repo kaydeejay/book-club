@@ -16,7 +16,7 @@ var newSchema = new Schema({
   'description': { type: String },
   'image': { type: String },
   'link': { type: String },
-  'read': { type: Boolean },
+  'read': { type: Boolean, default: false },
   'createdAt': { type: Date, default: Date.now },
   'updatedAt': { type: Date, default: Date.now }
 });
