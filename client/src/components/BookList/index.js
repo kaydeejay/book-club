@@ -1,23 +1,27 @@
-import React from 'react';
-import BookListItem from '../BookListItem';
+import React from 'react'
 
-const BookList = ({ books }) => {
-  console.log(books)
+export const BookList = (props) => {
   return (
     <div>
-      {books.length > 0 ?
-        books.map(book => (
-          <BookListItem
-            key={book._id}
-            image={book.image}
-            title={book.title}
-            authors={book.authors.join(', ')}
-            desc={book.description.slice(0, 280) + "..."}
-          />
-        )) :
-        "Loading Books..."}
+      <h3>{props.header}</h3>
+      {props.children}
     </div>
-  )
+  );
 }
 
-export default BookList;
+export const BookListItem = ({
+  // extract props
+  image,
+  title,
+  authors,
+  description
+}) => {
+  return (
+    <div>
+      <img src={image} alt="" />
+      <h4>{title}</h4>
+      <p>{authors}</p>
+      <p>{description}</p>
+    </div>
+  );
+}
