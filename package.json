@@ -14,6 +14,8 @@
     "seed": "node ./models/seed/seedfile.js"
   },
   "dependencies": {
+    "axios": "^0.19.2",
+    "concurrently": "^5.2.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
@@ -21,9 +23,6 @@
     "if-env": "^1.0.4",
     "mongoose": "^5.9.9",
     "morgan": "~1.9.1"
-  },
-  "devDependencies": {
-    "concurrently": "^5.1.0"
   },
   "engines": {
     "node": "12.14.1"
