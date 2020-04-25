@@ -70,8 +70,9 @@ const Home = () => {
   }
 
   const handleBookSave = (e) => {
-    console.log(e.target.props);
-    // const { title, authors, description, image } = e.target.props
+    console.log(e.target.attributes);
+    const { title, authors, description, image } = e.target.attributes;
+    console.log(title, authors, description, image);
     // API.saveBook({
     //   title: title,
     //   authors: authors,
