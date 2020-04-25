@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SavedBookList from '../../SavedBookList';
+import FoundBookList from '../../FoundBookList';
 
 import SearchContext from '../../../utils/SearchContext';
 import DbContext from '../../../utils/DbContext';
@@ -7,7 +8,7 @@ import API from '../../../utils/API';
 
 const Home = () => {
   const [dbBooksState, setDbBooksState] = useState("ready");
-  const [searchBooksState, setSearchBooksState] = useState("ready");
+  const [searchBooksState, setSearchBooksState] = useState("Search Results will Appear Here");
 
   const [savedBooks, setSavedBooks] = useState({
     books: [],
@@ -16,7 +17,7 @@ const Home = () => {
   });
   const [searchedBooks, setSearchedBooks] = useState({
     books: [],
-    // handleBookSave
+    handleBookSave
   });
   const [formState, setFormState] = useState({});
 
@@ -64,11 +65,10 @@ const Home = () => {
     setSearchBooksState("Search Results will Appear Here");
     const { title, author } = formState;
     const searchTerms = makeSearch(title, author);
-    const url = `https://www.googleapis.com/books/v1/volumes?q=${searchTerms}+&key=`;
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${searchTerms}&key=`;
     API.googleBookSearch(url)
       .then(res => {
-        console.log(res.data);
-        setSearchedBooks(res.data);
+        setSearchedBooks({ ...searchedBooks, books: res.data });
         setSearchBooksState("resolved");
       })
       .catch(err => {
@@ -77,7 +77,7 @@ const Home = () => {
       });
   }
 
-  const handleBookSave = (e) => {
+  function handleBookSave() {
     console.log("Read Me!");
     // API.saveBook({
     //   title: title,
@@ -90,8 +90,11 @@ const Home = () => {
     //   })
   }
 
-  function handleBookDelete() {
-    console.log('this kills the book');
+  function handleBookDelete(id) {
+    // console.log('this kills the book');
+    console.log(id);
+    API.deleteBook(id)
+      .then(() => loadBooks());
   }
 
   return (
@@ -108,9 +111,9 @@ const Home = () => {
         <button onClick={handleFormSubmit}>Search Google Books</button>
       </form>
       {searchBooksState !== "resolved"
-        ? <p>{dbBooksState}</p>
+        ? <p>{searchBooksState}</p>
         : <SearchContext.Provider value={searchedBooks}>
-          <SavedBookList books={searchedBooks} />
+          <FoundBookList books={searchedBooks} />
         </SearchContext.Provider>}
     </div>
   );
