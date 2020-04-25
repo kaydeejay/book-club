@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import SearchContext from '../../utils/SearchContext';
+import SaveButton from '../SaveButton';
 
 const FoundBook = (props) => {
   const { image, title, authors, description } = props;
@@ -10,8 +11,8 @@ const FoundBook = (props) => {
       <h4>{title}</h4>
       <p>{authors}</p>
       <p>{description}</p>
-      {/* <SaveButton /> */}
-      <button onClick={handleBookSave}>Save to Library</button>
+      <SaveButton {...props} handleBookSave={handleBookSave} />
+      {/* <button onClick={handleBookSave}>Save to Library</button> */}
     </div>
   );
 }

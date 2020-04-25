@@ -77,17 +77,12 @@ const Home = () => {
       });
   }
 
-  function handleBookSave() {
+  function handleBookSave(book) {
     console.log("Read Me!");
-    // API.saveBook({
-    //   title: title,
-    //   authors: authors,
-    //   description: description,
-    //   image: image
-    // })
-    //   .then(() => {
-    //     loadBooks();
-    //   })
+    API.saveBook(book)
+      .then(() => {
+        loadBooks();
+      })
   }
 
   function handleBookDelete(id) {
