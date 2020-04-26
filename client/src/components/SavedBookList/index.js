@@ -2,17 +2,21 @@ import React, { useContext } from 'react';
 import DbContext from '../../utils/DbContext';
 import DeleteButton from '../DeleteButton';
 
+import './style.css';
+
 const SavedBook = (props) => {
   const { id, image, title, authors, description } = props;
   const { handleBookDelete } = useContext(DbContext);
   console.log(props)
   return (
-    <div>
+    <div className="book-container">
       <img src={image} alt="" />
-      <h4>{title}</h4>
-      <p>{authors}</p>
-      <p>{description}</p>
-      <DeleteButton handleBookDelete={handleBookDelete} id={id} />
+      <div className="book-details">
+        <h4>{title}</h4>
+        <p>{authors}</p>
+        <p>{description}</p>
+        <DeleteButton handleBookDelete={handleBookDelete} id={id} />
+      </div>
       {/* <button onClick={handleBookDelete}>Delete</button> */}
     </div>
   );
@@ -22,7 +26,7 @@ const SavedBookList = () => {
   const { books } = useContext(DbContext);
   // console.log(useContext(DbContext));
   return (
-    <div>
+    <div className="left">
       {books.length > 0
         ? books.map(book => (
           <SavedBook

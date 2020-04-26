@@ -1,0 +1,19 @@
+.left {
+  width: 50%;
+  float: left;
+  padding: 0 5px 0 5px;
+}
+
+.book-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 5px;
+}
+
+.book-container img {
+  min-width: 128px;
+  min-height: 210px;
+  max-width: 128px;
+  max-height: 210px;
+  padding-right: 5px;
+}
