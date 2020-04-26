@@ -1,17 +1,20 @@
 import React, { useContext } from 'react';
 import SearchContext from '../../utils/SearchContext';
 import SaveButton from '../SaveButton';
+import './style.css';
 
 const FoundBook = (props) => {
   const { image, title, authors, description } = props;
   const { handleBookSave } = useContext(SearchContext);
   return (
-    <div>
+    <div className="book-container">
       <img src={image} alt="" />
-      <h4>{title}</h4>
-      <p>{authors}</p>
-      <p>{description}</p>
-      <SaveButton {...props} handleBookSave={handleBookSave} />
+      <div className="book-details">
+        <h4>{title}</h4>
+        <p>{authors}</p>
+        <p>{description}</p>
+        <SaveButton {...props} handleBookSave={handleBookSave} />
+      </div>
       {/* <button onClick={handleBookSave}>Save to Library</button> */}
     </div>
   );

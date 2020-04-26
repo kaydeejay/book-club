@@ -99,17 +99,19 @@ const Home = () => {
         : <DbContext.Provider value={savedBooks}>
           <SavedBookList books={savedBooks} />
         </DbContext.Provider>}
-      {/* Search Form */}
-      <form>
-        <input onChange={handleInputChange} name="title" placeholder="Title" />
-        <input onChange={handleInputChange} name="author" placeholder="Author" />
-        <button onClick={handleFormSubmit}>Search Google Books</button>
-      </form>
-      {searchBooksState !== "resolved"
-        ? <p>{searchBooksState}</p>
-        : <SearchContext.Provider value={searchedBooks}>
-          <FoundBookList books={searchedBooks} />
-        </SearchContext.Provider>}
+      <div className="right">
+        {/* Search Form */}
+        <form>
+          <input onChange={handleInputChange} name="title" placeholder="Title" />
+          <input onChange={handleInputChange} name="author" placeholder="Author" />
+          <button onClick={handleFormSubmit}>Search Google Books</button>
+        </form>
+        {searchBooksState !== "resolved"
+          ? <p>{searchBooksState}</p>
+          : <SearchContext.Provider value={searchedBooks}>
+            <FoundBookList books={searchedBooks} />
+          </SearchContext.Provider>}
+      </div>
     </div>
   );
 
